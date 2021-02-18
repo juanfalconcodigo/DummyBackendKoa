@@ -1,4 +1,6 @@
 const { createOwnerConditionService } = require('../controller/index');
+const rp = require('request-promise');
+const { get } = require('request-promise');
 
 let orders = [{
         rule_id: "1",
@@ -69,4 +71,18 @@ exports.getOwnerOrderConditionFacade = async(ctx) => {
         }
     }
 
+}
+
+
+exports.dummyApi = async(ctx) => {
+    const data = await rp({
+        uri: 'https://randomuser.me/api?results=5',
+        method: 'GET',
+        json: true
+    });
+    ctx.status = 202;
+    ctx.body = {
+        ok: true,
+        data: data.results
+    }
 }
