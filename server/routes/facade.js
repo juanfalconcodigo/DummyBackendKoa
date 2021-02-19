@@ -1,6 +1,5 @@
 const { createOwnerConditionService } = require('../controller/index');
 const rp = require('request-promise');
-const { get } = require('request-promise');
 
 let orders = [{
         rule_id: "1",
@@ -9,7 +8,7 @@ let orders = [{
         /* last_update:, */
         notification_type: 'orders',
         enabled: true,
-        order_status: [1, 2, 3],
+        order_status: "level_1",
         email_address: 'test@gmail.com'
     },
     {
@@ -19,7 +18,7 @@ let orders = [{
         /* last_update:,*/
         notification_type: 'orders',
         enabled: true,
-        order_status: [3],
+        order_status: "level_3",
         email_address: 'test2@gmail.com'
     },
     {
@@ -29,20 +28,21 @@ let orders = [{
         /* last_update:,*/
         notification_type: 'orders',
         enabled: false,
-        order_status: [2],
+        order_status: "level_1",
         email_address: 'test3@gmail.com'
     },
-    {
-        rule_id: "4",
-        rule_name: "rule four",
-        rule_description: "rule description four",
-        /* last_update:, */
-        notification_type: 'orders',
-        enabled: true,
-        order_status: [1],
-        email_address: 'test4@gmail.com'
-    }
-]
+];
+
+const order = {
+    rule_id: "1",
+    rule_name: "rule one",
+    rule_description: "rule description",
+    /* last_update:, */
+    notification_type: 'orders',
+    enabled: true,
+    order_status: "level_1",
+    email_address: 'test@gmail.com'
+}
 
 exports.getOwnerConditionsFacade = async ctx => {
     ctx.body = orders
@@ -85,4 +85,16 @@ exports.dummyApi = async(ctx) => {
         ok: true,
         data: data.results
     }
+}
+
+
+exports.getOwnerUserOrderConditionFacade = async(ctx) => {
+    console.log(ctx.get('login_id'));
+    ctx.status = 202;
+    ctx.body = {
+        success: true,
+        rules: [
+            {...order }
+        ]
+    };
 }
