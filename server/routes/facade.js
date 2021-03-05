@@ -45,7 +45,10 @@ const order = {
 }
 
 exports.getOwnerConditionsFacade = async ctx => {
-    ctx.body = orders
+    ctx.body = {
+        success: true,
+        data: orders
+    }
 }
 
 exports.getOwnerOrderConditionFacade = async(ctx) => {
