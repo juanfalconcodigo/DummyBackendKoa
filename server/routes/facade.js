@@ -101,3 +101,34 @@ exports.getOwnerUserOrderConditionFacade = async(ctx) => {
         ]
     };
 }
+
+
+exports.getTwoservices = async(ctx) => {
+    const responseOne = await rp({
+        uri: 'https://randomuser.me/api?results=2',
+        method: 'GET',
+        json: true
+    })
+
+    try {
+        const responseTwo = await rp({
+            uri: 'https://fakefakefake.com',
+            method: 'GET',
+            json: true
+        }) || null;
+
+        ctx.body = {
+            dataOne: responseOne.results,
+            dataTwo: responseTwo,
+            available: true
+        }
+
+    } catch (error) {
+        console.log(error.message);
+        ctx.body = {
+            available: false
+        }
+
+    }
+
+}

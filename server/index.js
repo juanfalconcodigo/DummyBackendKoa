@@ -9,8 +9,8 @@ app.use(cors());
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-/* app.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server is running in port : ${PORT}`);
-}); */
+});
 
 module.exports = app;
