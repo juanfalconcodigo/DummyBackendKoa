@@ -132,3 +132,22 @@ exports.getTwoservices = async(ctx) => {
     }
 
 }
+
+exports.postTestOne = async(ctx) => {
+    const { name, email } = ctx.request.body;
+    if (name && email) {
+        ctx.status = 201;
+        ctx.body = {
+            status: 201,
+            data: name + ' ' + email
+        }
+    } else {
+        ctx.status = 400;
+        ctx.body = {
+            status: 400,
+            data: null
+        }
+    }
+
+
+}

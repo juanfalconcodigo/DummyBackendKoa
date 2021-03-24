@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 const router = new Router({ prefix: '/apitest' });
-const { getOwnerConditionsFacade, getOwnerOrderConditionFacade, dummyApi, getOwnerUserOrderConditionFacade, getTwoservices } = require('./facade');
+const { getOwnerConditionsFacade, getOwnerOrderConditionFacade, dummyApi, getOwnerUserOrderConditionFacade, getTwoservices, postTestOne } = require('./facade');
 
 //este apunta a todas los notificaciones
 router.get('/order', getOwnerConditionsFacade);
@@ -12,5 +12,7 @@ router.get('/dummy', dummyApi);
 router.get('/order/rule', getOwnerUserOrderConditionFacade);
 //validate is up service
 router.get('/twoservice', getTwoservices);
+//validate is get service test
+router.post('/testone', postTestOne);
 
 module.exports = router;

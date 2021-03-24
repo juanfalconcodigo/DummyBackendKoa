@@ -10,4 +10,19 @@ describe('Test Endpoints ENP', () => {
         expect(res.body).toHaveProperty('data')
         expect(res.body.data).toHaveLength(3)
     })
+
+    it('[TESTPOST] should return success create', async() => {
+        await request.post('/apitest/testone').send({
+            name: 'Juan',
+            email: 'juan@gmail.com'
+        }).set('Accept', 'application/json').expect(201)
+    });
+
+    it('[TESTPOST] should return error create', async() => {
+        const response = await request.post('/apitest/testone').send({
+            name: 'Juan'
+        }).set('Accept', 'application/json').expect('Content-Type', 'application/json; charset=utf-8');
+        expect(response.status).toEqual(400);
+    });
+
 })
